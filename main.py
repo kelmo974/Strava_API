@@ -6,12 +6,13 @@ import pandas as pd
 
 load_dotenv()
 
-customer_id = os.getenv("customer_id")
-customer_secret = os.getenv("customer_secret")
+client_id = os.getenv("client_id")
+client_secret = os.getenv("client_secret")
 refresh_token = os.getenv("refresh_token")
+print(client_id)
 
 
-if not all([customer_id, customer_secret, refresh_token]):
+if not all([client_id, client_secret, refresh_token]):
     raise ValueError("Missing Strava API Credentials from .env file")
 
 # Strava endpoints
@@ -21,8 +22,8 @@ activities_url = "https://www.strava.com/api/v3/athlete/activities"
 def refresh_access_token():
     """Refreshes the access token using the refresh token."""
     payload = {
-        "client_id": customer_id,
-        "client_secret": customer_secret,
+        "client_id": client_id,
+        "client_secret": client_secret,
         "grant_type": "refresh_token",
         "refresh_token": refresh_token,
     }
